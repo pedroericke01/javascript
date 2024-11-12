@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sucessor & Antecessor</title>
+</head>
+<body>
+    <h1>Sucessor & Antecessor</h1>
+
+    <p>
+        Escolha um numero (0 a 10):
+        <input type="number" name="txt_numero" id="txt_numero">   
+        
+        <input type="button" value="enviar" onclick="analisar()">
+
+    </p>
+     
+    
+    <p id="msg1"></p>
+    <p id="msg2"></p>
+    <p id="msg3"></p>
+
+    <script>
+        function analisar(){
+            //principal fonte de dados que permite realizar a analise dos dados:
+            var fonte_numeros = [0,1,2,3,4,5,6,7,8,9,10]
+      
+            //fontes auxiliares que permitirão armazenar os numeros antecessores e
+            //numeros sucessores respectivamente:
+            var aux_antecessores = []
+            var aux_sucessores = []
+
+            //ligando as principais variáveis do sistema ao script:
+            var txt_numero = window.document.getElementById('txt_numero')
+            var msg1 = window.document.getElementById('msg1')
+            var msg2 = window.document.getElementById('msg2')
+
+            //convertendo a string para valor numérico:
+            var numero = Number(txt_numero.value)
+
+            //criando o loop que percorre toda a fonte de dados e analisa os
+            //valores sucessores e antecessores do numero escolhido pelo
+            //usuário do sistema:
+            for(let cont = 0; cont < fonte_numeros.length; cont += 1){
+                if (fonte_numeros[cont] < numero){
+                    aux_antecessores.push(fonte_numeros[cont])
+
+                } else if(fonte_numeros[cont] > numero){
+                    aux_sucessores.push(fonte_numeros[cont])
+                }
+            }
+            msg1.innerText = `O numero escolhido foi: ${numero}`
+
+            msg2.innerText = `Numeros Antecessores: ${aux_antecessores}`
+            
+            msg3.innerText = `Numeros Sucessores: ${aux_sucessores}`
+
+            txt_numero.value = ``
+            txt_numero.focus()
+
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculando Area</title>
+</head>
+<body>
+    <h1>Calculando Aréa</h1>
+
+    <p>
+        Largura: <input type="number" name="txt_largura" id="txt_largura">
+    </p>
+
+    <p>
+        Altura: <input type="number" name="txt_altura" id="txt_altura">
+    </p>
+
+    <input type="button" value="calcular" onclick="calcular()">
+
+    
+    <p id="msg"></p>
+
+    <script>
+
+        function calcular(){
+            
+            var txt_largura = window.document.getElementById('txt_largura')
+            var txt_altura = window.document.getElementById('txt_altura')
+            
+            var largura = Number(txt_largura.value).toFixed(2)
+            var altura = Number(txt_altura.value).toFixed(2)
+            
+            //validando os inputs do usuário, não podem ser valores negativos:
+            if(largura <= 0 || altura <= 0){
+                window.alert('[ERRO!]revise os dados e tente novamente!')
+            } else{
+                var mensagem = window.document.getElementById('msg')
+                var area = (largura*altura)
+                var quant_tinta = (area / 2).toFixed(2)
+                
+                mensagem.innerText = `Será necessario ${quant_tinta} litros de tinta para pintar essa parede.`
+                
+                txt_altura.value = ``
+                txt_largura.value = ``
+
+                txt_altura.focus()
+                txt_largura.focus()
+            }
+        }
+    </script>
+
+</body>
+</html>

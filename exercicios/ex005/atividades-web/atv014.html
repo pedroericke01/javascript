@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loja Alfa</title>
+</head>
+<body>
+    <h1>Loja Alfa</h1>
+
+    <p>
+        Preço do Produto: <input type="number" name="txt_preco" id="txt_preco">
+    </p>
+
+    <p>
+        Quantidade: <input type="number" name="txt_quantidade" id="txt_quantidade">
+    
+        <input type="button" value="Comprar" onclick="calcular()">
+
+    </p>
+
+    
+    <div id="res"></div>
+    
+    <script>
+        function calcular(){
+            var txt_preco_produto = window.document.getElementById('txt_preco')
+            var txt_quantidade = window.document.getElementById('txt_quantidade')
+            var mensagem = window.document.getElementById('res')
+            
+            //convertendo os inputs do preço do produto e da sua quantidade de 
+            //string para valor numerico e extraindo seus respectivos dados:
+            var preco_produto = Number(txt_preco_produto.value).toFixed(2)
+            var quantidade = Number(txt_quantidade.value)
+            //criando variável que vai calcular o total da compra:
+            var total = (preco_produto*quantidade).toFixed(2)
+
+            /*validando os dados conforme os seguintes parâmetros:
+            1-os valores não podem menores ou iguais a zero;
+            2-caso se compre em uma quantidade maior que 10, será dado desconto de 5%;
+            */
+            if(preco_produto <= 0 || quantidade <= 0){
+                window.alert('[ERRO!]revise os dados e tente novamente!')
+            } else{
+                //caso os numeros sejam válidos, verificar se teremos desconto na
+                //compra ou não com base na quantidade:
+                if(quantidade >= 10){
+                    let desconto = (total * 0.05).toFixed(2)
+                    let total_desconto = (total - desconto).toFixed(2)
+                    mensagem.innerText = `Total:R$${total} - 5% = R${total_desconto}`
+                } else{
+                    mensagem.innerText = `Total:R$${total}`
+                }
+
+                txt_preco_produto.value = ``
+                txt_quantidade.value = ``
+
+                txt_preco_produto.focus()
+                txt_quantidade.focus()
+            }
+
+        }
+    </script>
+
+</body>
+</html>

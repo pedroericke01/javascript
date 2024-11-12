@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 24</title>
+</head>
+<body>
+    <h1>Exercício 24</h1>
+
+    <h3>Escolha numeros maiores do que zero e menores do que dez</h3>
+
+    <p>Primeiro Bimestre:<input type="number" id="txt_b1"></p>
+    
+    <p>Segundo Bimestre:<input type="number" id="txt_b2"></p>
+    
+    <p>Terceiro Bimestre:<input type="number" id="txt_b3"></p>
+    
+    <p>
+        Quarto Bimestre: <input type="number" id="txt_b4">
+        <input type="button" id="botao" value="Calcular">
+    </p>
+
+    <div id="res">
+        <p></p>
+    </div>
+
+    <script>
+        /* função que me retorna a média final do aluno: */
+        function calcular_media(array_notas){
+                        
+            let soma = null;
+            
+            for(let cont=0; cont < array_notas.length; cont+=1){
+                soma += array_notas[cont];
+            }
+            
+            let media = ((soma)/4).toFixed(2);
+            return media;
+        }
+
+        /* criando função para validação dos numeros inseridos pelo usuário para 
+        garantir que o input de dados seja de fato um valor numérico, esse numero 
+        deve ser maior que zero: */
+        function numero_valido(numero){
+            if(numero <= 10 && numero > 0){
+                return true;
+            }else{
+                return false;
+            }
+        };
+
+        /* capturando os 3 inputs numéricos: */
+        var txt_b1 = window.document.getElementById('txt_b1');
+        var txt_b2 = window.document.getElementById('txt_b2');
+        var txt_b3 = window.document.getElementById('txt_b3');
+        var txt_b4 = window.document.getElementById('txt_b4');
+
+        /* adicionar um ouvidor de eventos que após o clique no botão será disparado
+        uma outra função no sistema: */
+        const botao = window.document.getElementById('botao');
+        botao.addEventListener("click", ()=>{
+            /* extraindo os dados inseridos no input dos usuários e convertendo-os
+            de string para Numéricos com ponto flutuante: */
+            const b1 = Number(txt_b1.value);
+            const b2 = Number(txt_b2.value);
+            const b3 = Number(txt_b3.value);
+            const b4 = Number(txt_b4.value);
+
+            const validacao1 = numero_valido(b1);
+            const validacao2 = numero_valido(b2);
+            const validacao3 = numero_valido(b3);
+            const validacao4 = numero_valido(b4);
+            
+            /* validando os numeros do sistema, caso sejam válidos, conseguiremos
+            avançar: */
+            if(validacao1 != true || validacao2 != true || validacao3 != true || validacao4 != true){
+                window.alert('[ERROR!]revise os dados e tente novamente!')
+            }else{
+                var resultado = window.document.querySelector('#res>p');
+
+                /* criando função que vai me retornar a média do aluno corretamente
+                passando como parâmetro uma variável composta que engloba as variáveis
+                com as pontuações dos 4 bimestres: */
+                const media = calcular_media([b1, b2, b3, b4]);
+
+                if(media >= 6){
+                    resultado.innerText = `Média ${media}. ALUNO APROVADO!`;
+                }else{
+                    resultado.innerText = `Média ${media}. ALUNO REPROVADO!`;
+                }
+                
+                /* limpando os campos que novos dados serão inseridos no sistema
+                gerando maior iteratividade com o usuário: */
+                txt_b1.value = '';
+                txt_b2.value = '';
+                txt_b3.value = '';
+                txt_b4.value = '';
+                
+                resultado.value = '';
+            }
+        });
+        
+    </script>
+</body>
+</html>

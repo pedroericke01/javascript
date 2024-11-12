@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercicio 21</title>
+    <style>
+        #painel_dados{
+            width: 185px;
+            padding: 5px;
+            margin-left: 48px;
+        }
+    </style>
+
+</head>
+<body>
+
+   <h1>Criando Lista de Apresentação aleatória dinamicamente:</h1>
+
+   <p>
+    Nome:
+    <input type="text" name="txt_nome" id="txt_nome">
+
+    <input type="button" value="cadastrar" onclick="cadastrar()">
+   </p>
+
+    <!-- criando o painel que vai exibir os dados cadastrados pelo usuário ao 
+    sistema: -->
+    <select name="painel_dados" id="painel_dados" size="5"></select>
+
+    <!-- criando a div que vai exibir o resultado final processado pelo sistema para
+    o usuário: -->
+    <div id="res">
+        <p></p>
+    </div>
+
+    <!-- inicializando escopo do javascript localmente: -->
+    <script>
+        /* criando a principal estrutura de dados do meu sistema: */
+        var lista_dados = []
+
+        var lista_apresentacao = []
+
+        /* função para validação do nome inserido pelo usuário, esse nome não pode
+        ser repetido dentro da minha base de dados: */
+        function nome_valido(nome, lista){
+            /* caso o nome que o usuário colocar for vazio ou ja exista dentro 
+            da base de dados, ele será inválido! */
+            if(nome.length == 0){
+                return false;
+            } else if(lista.indexOf(nome) != -1){
+                /* nome ja existe na base de dados: */
+                return false;
+            } else{
+                /* nome ainda não existe na base de dados, portanto é válido! */
+                return true;
+            }
+        }
+
+        /* função que controla o tamanho da estrutura de dados, sabemos que existem
+        ao todo 5 alunos na turma: */
+        function possibilidade_cadastro(lista){
+            if(lista.length > 4){
+                return false;
+            } else{
+                return true;
+            }
+        }
+
+        /* criando a função principal do sistema */
+        function cadastrar(){
+            /* ligar os principais elementos do html5 necessários para o cadastro: */
+            var txt_nome = window.document.getElementById('txt_nome')
+
+            /* extraindo o respectivo dado inserido pelo usuário no sistema: */
+            var nome = (txt_nome.value)
+
+            /* validando a possibilidade de cadastro no sistema */
+            var pos_cadastro = possibilidade_cadastro(lista_dados)
+
+            if(pos_cadastro == false){
+                window.alert('[ERRO!]quant.max.cadastros alcançada!')
+            } else{
+                /* validando o nome inserido pelo usuário, o mesmo não pode
+                ser nulo nem repetido na base de dados: */
+                var res_nome = nome_valido(nome, lista_dados)
+                
+                if(res_nome == false){
+                    window.alert('[ERRO!]nome inválido/ja exista na base de dados!')
+                } else{
+                    
+                    /* no caso do nome ser válido, podemos adicioná-lo na lista */
+                    lista_dados.push(nome)
+
+                    /* ligando o painel de dados ao meu sistema javascript: */
+                    let painel_dados = window.document.getElementById('painel_dados')
+
+                    /* criando a tag option dinamicamente pelo javascript: */
+                    let novo_registro = window.document.createElement('option')
+                    
+                    /* atribuindo o novo nome a minha tag option */
+                    novo_registro.innerText = `${nome}`
+
+                    /* adicionar a tag option com o novo registro no final do 
+                    painel de dados: */
+                    painel_dados.appendChild(novo_registro)
+
+                    /* limpando o campo de input do nome: */
+                    txt_nome.value = ``
+                    
+                    mensagem_final()  
+                }
+            }
+        }
+
+        /* criando a função que mostra para o usuário a lista de apresentação
+        criada pelo sistema, aleatóriamente: */
+        function mensagem_final(){
+            
+            var mensagem = window.document.querySelector('#res>p')
+
+            var resp_poss_cadastro = possibilidade_cadastro(lista_dados)
+            
+            if(resp_poss_cadastro == false){
+
+                for(let cont = 0; cont < lista_dados.length; cont+=1){
+                        
+                    /* implementando a escolha aleatória de um numero entre 0 e o
+                    limite máximo do tamanho da lista de dados: */
+                    let escolha = Math.floor(Math.random()*lista_dados.length)
+
+                    /* variável que vai armazenar o nome escolhido pelo sistema: */
+                    let nome = lista_dados[escolha]
+
+                    /* não pode existir nomes duplicados na lista de apresentação */
+                    let res_escolha = nome_valido(nome, lista_apresentacao)
+                    
+                    if(res_escolha == false){
+                        /* sabendo que preciso de exatos 5 nomes para criar minha
+                        lista de apresentação, no caso de o nome escolhido ja exista
+                        na lista de apresentação, precisaremos refazer uma nova escolha
+                        aleatória */
+                        cont -= 1
+                    } else{
+                        /* adicionar o nome na lista de apresentação */
+                        lista_apresentacao.push(nome)
+                    }
+                }
+                mensagem.innerHTML = `A ordem de apresentação será: [${lista_apresentacao}]`
+            }
+
+        }
+
+</script>
+</body>
+</html>

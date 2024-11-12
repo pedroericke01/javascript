@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos no DOM</title>
+    
+    <style>
+        div#area{
+            background-color: gainsboro;
+            width: 200px;
+            height: 200px;
+        }
+        #area > p{
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            font-size: 25px;
+            font-weight: bold;
+            padding-top: 43%;
+        }
+
+    </style>
+</head>
+<body>
+    <h1>Aprendendo Eventos no DOM</h1>
+
+    <div id="area">
+        <p>interaja!</p>
+    </div>
+    
+    <script>
+
+        /*
+
+        1-eventos com mouse: todos esses eventos ficam ouvindo e esperando a interação
+        do usuário com o sistema:
+
+        I-mouseenter():esse evento acontece no momento que o mouse entra dentro de
+        um determinado elemento no html.
+
+        II-mousemove():esse evento acontece no momento que o usuário após entrar com
+        o mouse dentro de um elemento, ficar movendo o mouse dentro do elemento especifico.
+
+        III-mousedown(): esse evento acontece no momento que o usuário clica e segura
+        o mouse dentro de um elemento em html5
+
+        IV-mouseup(): esse evento acontece no momento que o usuário após clicar com o
+        mouse dentro de um elemento em html soltar()parar de clicar com o mouse. nesse
+        momento, o desenvolvedor poderá criar alguma interação do sistema com o usuário.
+
+        V-click(): esse evento acontece quando o usuário aperta e clica em um elemento
+        no html rapidamente, uma interação do sistema com o usuário tambem poderá ser 
+        desenvolvida.
+
+        VI-mouseout(): esse evento acontece no momento que o usuário tira o mouse de
+        dentro de um elemento no html, no momento que isso acontecer, alguma interação poderá
+        ser criada pelo desenvolvedor.
+        
+        2- função em Javascript: Uma função é ativada no momento que ela for invocada.
+        por exemplo, no momento que um event listner como o mouseenter() acontecer,
+        uma determinada função será ativada, nela que será definida qual interação que
+        meu sistema deverá ser capaz de realizar para meu usuário.
+        
+        3-utilizando addEventListner(): ouvidores de eventos, elementos que me 
+        permite criar interações a partir de eventos que são disparados no momento
+        que o usuário fazer alguma ação no site.
+        */
+
+        //vamos utilizar 2 variáveis globais para executar cada processo do sistema:
+        var area = window.document.getElementById('area')
+        var palavra = window.document.querySelector('#area > p')
+
+        //adicionando os ouvidores de eventos dentro do script no sistema:
+        area.addEventListener('click',clicou)
+        area.addEventListener('mouseenter', entrou)
+        area.addEventListener('mouseout', saiu)
+
+        function entrou(){
+            area.style.background = "yellow"
+
+            palavra.innerHTML = 'Entrou!'
+        }
+
+        function saiu(){
+            area.style.background = 'gainsboro'
+            
+            palavra.innerHTML = 'Saiu!'
+        }
+
+        function clicou(){
+            area.style.background = 'green'
+
+            palavra.innerHTML = 'Clicou!'
+        }
+        
+    </script>
+</body>
+</html>

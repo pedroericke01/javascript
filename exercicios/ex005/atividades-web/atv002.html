@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nacionalidade</title>
+</head>
+<body>
+    <h1>Verificando sua nacionalidade</h1>
+
+    Seu país de origem: <input type="text" name="txt_nacionalidade" id="txt_nacionalidade">
+    <input type="button" value="enviar" onclick="verificar()">
+
+    <div id="res">Resultado</div>
+
+    <script>
+                
+        function verificar(){
+            //ligando as 2 tags principais para a interação no sistema ao script:
+            var txt_nacao = window.document.getElementById('txt_nacionalidade')
+            var resultado = window.document.getElementById('res')
+            //pegando o valor do input inserido pelo usuário e convertendo o mesmo
+            //para caracteres maiusculos:
+            nacionalidade = (txt_nacao.value).toUpperCase()
+            
+            if (nacionalidade == 'BRASIL') {
+                resultado.innerText = 'Você é Brasileiro'
+            } else{
+                resultado.innerText = 'Você é Estrangeiro'
+            }
+            
+        }
+    </script>
+
+</body>
+</html>

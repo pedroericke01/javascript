@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 22</title>
+</head>
+<body>
+    <h1>Exercicio 22</h1>
+
+    <p>Escolha três numeros válidos:</p>
+
+    <p>
+        Numero 1:<input type="number" id="txt_num1">
+    </p>
+    
+    <p>
+        Numero 2:<input type="number" id="txt_num2">
+    </p>
+    
+    <p>
+        Numero 3:<input type="number" id="txt_num3"> 
+        
+        <input type="button" value="Enviar" id="botao">
+    </p>
+
+    <div id="res">
+        <p></p>
+    </div>
+
+    <script>
+
+        function analisar_array(array){       
+            let maior = array[0];
+            let menor = array[0];
+            for(let cont=0; cont < array.length; cont+=1){
+                if(array[cont] >= maior){
+                    maior = array[cont];
+                }
+                else if(array[cont] <= menor){
+                    menor = array[cont];
+                }
+            }
+            /* retornando um objeto com as respectivas posições de maior e menor: */
+            return [maior, menor];
+        }
+
+        /* função que verifica se o numero que meu usuário deu o input é válido, ou seja
+        se é >=0, para proseguir o sistema: */
+        function numero_valido(numero){
+            if(numero >= 0){
+                return true;
+            }else{
+                return false;
+            }
+        }
+
+        /* capturando os 3 inputs numéricos  */
+        var txt_num1 = window.document.getElementById('txt_num1');
+        var txt_num2 = window.document.getElementById('txt_num2');
+        var txt_num3 = window.document.getElementById('txt_num3');
+
+        /* caṕturando o botão que envia os dados para a analise front end: */
+        const botao = window.document.getElementById('botao')
+        /* adicionando um ouvidor de eventos no botão que envia os dados para analise
+        no front end, esperando o evento do 'click' do mouse nesse botão e após tal
+        evento ser executado, será executada a arrow function: */
+        botao.addEventListener("click", ()=>{
+            
+            const num1=(parseInt(txt_num1.value))
+            const num2=(parseInt(txt_num2.value))
+            const num3=(parseInt(txt_num3.value))
+
+            let res_validacao_num1 = numero_valido(num1);
+            let res_validacao_num2 = numero_valido(num2);
+            let res_validacao_num3 = numero_valido(num3);
+
+
+            if(res_validacao_num1 == false || res_validacao_num2 == false || res_validacao_num3 == false){
+                window.alert('[ERROR!]revise os dados e tente novamente!')
+                console.log('\nEncontramos Algo errado!')
+            }else{
+                /* criando o array auxliar que me permitirá armazenar responsivamente
+                os dados: */
+                let array_numeros = []
+                
+                /* adicionando os 3 numeros em um array no javascript: */
+                array_numeros.push(num1)
+                array_numeros.push(num2)
+                array_numeros.push(num3)
+                
+                /* chamada a função que percorre meu array e me retorna o maior e 
+                menor numero desse array: */
+                var resultado_array = analisar_array(array_numeros);
+
+                var mensagem = window.document.querySelector('#res > p')
+                mensagem.innerHTML = `${resultado_array[0]} é maior e ${resultado_array[1]} é menor!`
+                
+                txt_num1.value = '';
+                txt_num2.value = '';
+                txt_num3.value = '';
+                
+            }
+            
+        })
+       
+    </script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Me fala sobre você</title>
+</head>
+<body>
+    <h1>Olá usuário, me fala sobre você</h1>
+
+    Nome: <input type="text" name="txt_nome" id="txt_nome"> <br>
+    
+    Idade: <input type="number" name="txt_idade" id="txt_idade">
+
+    <input type="button" value="enviar" onclick="reagir()">
+
+    <div id="res">Resultado</div>
+
+    <script>
+        
+        function reagir(){
+            var txt_nome = window.document.getElementById('txt_nome')
+            var txt_idade = window.document.getElementById('txt_idade')
+
+            //extraindo o valor do input 'txt_nome' criado no html5:
+            var nome = (txt_nome.value)
+            //convertendo string para valor numérico de um input 'txt_idade' e 
+            //extraindo seu respectivo valor do input:
+            var idade = Number(txt_idade.value)
+
+            var resultado = window.document.getElementById('res')
+
+            resultado.innerText = `Ola ${nome} você tem ${idade} anos de idade.`
+           
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 018 </title>
+</head>
+<body>
+    <h1>Calculando a hipotenusa de uma figura geométrica:</h1>
+
+    <p>
+        Lado A: 
+        <input type="number" name="txt_ladoA" id="txt_ladoA">
+    </p>
+
+    <p>
+        Lado B:
+        <input type="number" name="txt_ladoB" id="txt_ladoB">
+    
+        <input type="button" value="Calcular" onclick="calcular()">
+
+    </p>
+
+
+    <div id="res">
+        <p></p>
+    </div>
+
+    <script>
+        function calcular(){
+            /*
+            fase1:acessar arvore dom e ligar os inputs do usuário ao meu script:
+            fase2:acessar arvore dom e ligar a principal div e respectivo parágrafo
+            que vai exibir o resultado final do programa para o usuário:
+            */
+        
+            var txt_lado_a = window.document.getElementById('txt_ladoA')
+            var txt_lado_b = window.document.getElementById('txt_ladoB')
+
+            var resultado = window.document.querySelector('#res>p')
+        
+            //converter os dados inseridos pelo usuário de string para numérico:
+            var lado_a = Number(txt_lado_a.value)
+            var lado_b = Number(txt_lado_b.value)
+
+            /*implementando controle de segurança para o sistema, onde os inputs
+            do usuário não poderão ser valores negativos nem iguais a zero:*/
+        
+            if(lado_a<=0 || lado_b <=0){
+                window.alert('[ERRO!]revise os dados e tente novamente!')
+            } else{
+
+                //criando varíavel que calcula a soma dos lados elevado ao cubo:
+                var soma = (Math.pow(lado_a, 2) + Math.pow(lado_b, 2))
+
+                //variável que calcula a hipotenusa da figura,
+                //convertendo para valor inteiro(sem pontos flutuantes),
+                //calculando a hipotenusa a seguir a partir do calculo acima(variável soma):
+                var hipotenusa = parseInt((Math.sqrt(soma)))
+
+                resultado.innerHTML = `A hipotenusa da figura é de: ${hipotenusa}cm`
+
+                //limpando os campos de input após o processamento dos dados:
+                txt_lado_a.value = ``
+                txt_lado_b.value = ``
+            }
+        }
+    </script>
+</body>
+</html>

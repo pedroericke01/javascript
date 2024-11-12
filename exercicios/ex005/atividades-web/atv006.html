@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saudações e Idade</title>
+</head>
+<body>
+    <h1>Saudações e idade</h1>
+
+    <section>
+
+        <p>
+            Nome: <input type="text" name="txt_nome" id="txt_nome">
+        </p>
+
+        <p>
+            idade: <input type="number" name="txt_idade" id="txt_idade">
+        </p>
+
+        <input type="button" value="enviar" onclick="verificar()">
+        
+        <div id="res">
+            <p></p>
+        </div>
+
+    </section>
+    
+    <script>
+
+        function verificar(){
+            //o unico erro desse sistema é que não consigo ATUALMENTE validar se
+            //o usuário inseriu de fato uma string de caracteres alfabéticos
+            //no input nome:
+
+            //ligando as 3 principais tags de interações do usuário com o sistema
+            //ao javascript:
+            var txt_nome = window.document.getElementById('txt_nome')
+            var txt_idade = window.document.getElementById('txt_idade')
+            var caixa_resultado = window.document.querySelector('#res > p')
+
+            //extraindo os dados dos respectivos inputs dados pelo usuário.
+            //
+            
+            var nome = (txt_nome.value)
+            
+            var idade = Number(txt_idade.value)
+            
+            /*realizando a validação dos dados:
+            1-o input nome não pode ser nulo ou vazio;
+            2-a idade não pode ser maior que 100 nem menor ou igual a 0
+            */
+             if(idade <= 0 || nome.length <= 0){
+                window.alert('[ERRO!]Nome e/ou Idade inválidos!')
+            } else{
+                //adicionando um texto a essa tag:
+                caixa_resultado.innerText = `Olá ${nome} você tem ${idade} anos!`
+                
+                /*
+                no momento que o usuário clicar em enviar o nome e idade corretos
+                e for exibida a mensagem acima, então os campos de nome e idade
+                serão limpos automaticamente através das funções abaixo:
+                */
+                txt_nome.value = ``
+                txt_nome.focus()
+
+                txt_idade.value = ``
+                txt_idade.focus()
+            }
+
+        }
+    </script>
+
+</body>
+</html>

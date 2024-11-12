@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercicio 19</title>
+    <style>
+        #painel_alunos{
+            width: 184px;
+            padding:5px;
+            margin-left: 112px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Sorteando Alunos para apagar o quadro</h1>
+
+    <p>
+        Nome do Aluno:
+        <input type="text" name="nome_aluno" id="nome_aluno">
+        <input type="button" value="cadastrar" onclick="cadastrar()">
+    </p>
+    
+    <!-- criando um painel que exibe a estrutura de dados 'lista de alunos' criada
+    na lógica do sistema: -->
+    <select name="painel_alunos" id="painel_alunos" size="5">
+        
+    </select>
+    
+    <!--campo que vai exibir a mensagem do aluno que foi escolhido pelo sistema
+    para apagar o quadro, essa escolha será aleatória-->
+    <div id="res">
+        <p></p>
+    </div>
+
+    <script>
+        /* inicializando a lista principal do sistema, que vai armazenar o nome
+        dos alunos que serão cadastrados no sistema; */
+        var lista_alunos = []
+        
+        /* essa função vai analisar se o nome que meu usuário inserir no sistema
+        ja existe ou não na lista dos alunos,
+        caso sim: será disparado um erro;
+        caso não: o nome poderá ser inserido corretamente;
+        *indexOf():Caso retorne -1 significa que o elmento não existe na lista;
+        caso contrário, informa o índice de um elemento correspondente
+        dentro da lista;
+        */
+        function nome_valido(nome, lista){
+            if(nome.length == 0){
+                //nome está vazio//
+                return false;
+            } else if(lista.indexOf(nome) == -1){
+                //nome não existe na estrutura de dados//
+                return true;
+            } else{
+                //nome ja existe na estrutura de dados//
+                return false
+            }
+        }
+
+        /* sabendo que teremos ao todo 4 alunos, então so podemos realziar no
+        maximo 4 cadastros no meu sistema, vamos criar um processo que será ativado
+        sempre, para verificar se é possível ou não cadastrar novos alunos na 
+        minha estrutura de dados: */
+        function possibilidade_cadastro(lista){
+            if(lista.length == 4){
+                //não será mais possível cadastrar novos alunos//
+                return false
+            } else{
+                //é possivel sim cadastrar novos alunos//
+                return true
+            }
+        }
+
+        /* criando a função principal do sistema: */
+        function cadastrar(){
+            /* fazendo a chamada ao processo de analise de possibilidade de cadastro: */
+            var res_possib_cadastro = possibilidade_cadastro(lista_alunos)
+
+            if(res_possib_cadastro == false){
+                window.alert('[ERRO!]não é possível cadastrar novos alunos!')
+            } else{
+                /* Acessando a arvore DOM e:
+                1-ligando o principal input do html ao meu sistema;
+                2-ligando o dataframe html5 ao meu sistema;
+                */
+                var txt_nome = window.document.getElementById('nome_aluno')
+                var painel_alunos = window.document.getElementById('painel_alunos')
+
+                /* extraindo o dado do input inserido pelo usuário no sistema: */
+                var nome = (txt_nome.value)
+
+                /* acionando a função de validação de nome, que verifica se o nome
+                existe ou não dentro da lista de nomes dos alunos; */
+                var res_nome = nome_valido(nome, lista_alunos)
+
+                /* implementando sistema de controle que verifica se o nome ja
+                existe ou não dentro da principal estutura do sistema,
+                caso sim: o sistema continua sua execução;
+                caso não:será disparado uma mensagem de erro e o sistema não vai 
+                conseguir avançar; */
+                if(res_nome == false){
+                    window.alert('[ERRO!]revise os dados e tente novamente!')
+                } else{
+                    /* adicionando o nome do novo aluno da minha lista de alunos: */
+                    lista_alunos.push(nome)
+
+                    /* criando dinamicamente a tag option que vai exibir o nome
+                    do aluno dentro do painel de alunos cadastrados pelo usuário;
+                    */
+                    var novo_aluno = window.document.createElement('option')
+                    novo_aluno.innerText = `${nome}`
+                    painel_alunos.appendChild(novo_aluno)
+
+                    /* após cadastrar corretamente um aluno no sistema os campos de
+                    inserir nome será limpo; */
+                    txt_nome.value = ``
+                    
+                    //fazendo a chamada do procedimento que realiza a escolha de um
+                    //aluno que está cadastrado no sistema, somente quando o ultimo aluno
+                    //for cadastrado que esse procedimento será ativado:   
+                    escolha_aluno()
+                }
+            }
+        }
+
+        /* função que percorre a lista de alunos(principal do sistema) e 
+        escolhe 1 alunos aleatóriamente para apagar o quadro */
+        function escolha_aluno(){
+            //ligando a div que vai exir o resultado do aluno que será escolhido;
+            let mensagem = window.document.querySelector('#res>p')
+            //criando a variável que vai fazer a escolha de um numero aleatório
+            //entre 0 até o tamanho máximo da lista de alunos(4):
+            let escolha_sistema = parseInt(Math.random()*lista_alunos.length)
+            //somente quando o ultimo(4) aluno for cadastrado corretamente que 
+            //essa mensagem da escolha aleatória do aluno vai aparecer:
+            if(lista_alunos.length == 4){
+                mensagem.innerHTML = `O aluno ${lista_alunos[escolha_sistema]} foi escolhido para apagar o quadro!`
+            }
+        }
+    
+    </script>
+
+</body>
+</html>

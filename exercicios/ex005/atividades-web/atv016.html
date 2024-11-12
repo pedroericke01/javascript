@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alugue Seu Carro</title>
+</head>
+<body>
+    <h1>Alugue seu Carro</h1>
+
+    <ul>
+        <h3>Observação:</h3>
+        <li>Diária:R$60.00</li>
+        <li>1KM percorrido:R$0.15</li>
+    </ul>
+    
+    <p>
+        Dias Alugados:
+        <input type="number" name="txt_dias" id="txt_dias">
+    </p>
+
+    <p>
+        Km Percorridos:
+        <input type="number" name="txt_km" id="txt_km">
+
+        <input type="button" value="Alugar" onclick="calcular()">
+    </p>
+
+    <div id="res">
+        <p></p>
+    </div>
+
+    <script>
+        function calcular(){
+            var txt_dias = window.document.getElementById('txt_dias')
+            var txt_km = window.document.getElementById('txt_km')
+            var mensagem = window.document.querySelector('#res>p')
+
+            //convertendo as strings inseridas nos inputs para valores numericos:
+            
+            var dias = Number(txt_dias.value)
+            var km_percorridos = Number(txt_km.value)
+
+            /*validando os dados inseridos nas variáveis dias e kms percorridos
+            com base no parâmetro que esses dados não podem ser negativos:*/
+            if(dias <= 0 || km_percorridos <= 0){
+                window.alert('[ERRO!]revise os dados e tente novamente!')
+            } else{
+               
+                var tot_dias = (dias * 60).toFixed(2) 
+                var tot_km = (km_percorridos * 0.15).toFixed(2)
+                var total = (Number(tot_dias) + Number(tot_km)).toFixed(2)
+
+                mensagem.innerHTML = `Total por dias alugados R$${tot_dias} 
+                + Total por km percorrido: R${tot_km} = 
+                Total a ser pago: R$${total}`
+
+            }
+        }
+    </script>
+</body>
+</html>

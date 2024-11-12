@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head> 
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <link rel="stylesheet" href="style.css">
+    
+    <script src="script.js"></script>
+    
+    <title>Verificador de identidade</title>
+</head>
+
+<body>
+
+    <header>
+        <h1>Verificador de identidade</h1>
+    </header>
+
+    <main>
+
+        <section>
+
+            <p>
+                ano de nascimento: 
+                <input type="number" name="txt_nascimento" id="txt_nascimento" min="0">
+            </p>
+
+            <p>
+                Genero: 
+                <input type="radio" name="txt_genero" id="txt_masc" checked>
+                <label for="txt_masc">Masculino</label>
+
+                <input type="radio" name="txt_genero" id="txt_fem">
+                <label for="txt_fem">Feminino</label>
+
+            </p>
+       
+            <p>
+                <input type="button" value="verificar" id="verific" onclick="verificar()">
+            </p>
+            
+            <div id="mensagem">Preencha os dados acima para ver o resultado!</div>
+            
+        </section>
+
+    </main>
+
+    <footer>
+        <p>
+            Site desenvolvido por @<a href="https://www.instagram.com/pedro.ericke/?next=%2F" target="_blank" rel="external">pedro.ericke</a>
+        </p>
+    </footer>
+</body>
+</html>

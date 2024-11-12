@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analisando Numeros</title>
+</head>
+<body>
+    <h1>Analisando Numeros</h1>
+
+    <p>
+        Escolha um Numero:
+        <input type="number" name="txt_numero" id="txt_numero">
+
+        <input type="button" value="verificar" onclick="verificar()">
+    </p>
+    
+    <p id="msg1"></p>
+    <p id="msg2"></p>
+    <p id="msg3"></p>
+
+    <script>
+
+        function verificar(){
+
+            var txt_numero = window.document.getElementById('txt_numero')
+
+            //convertendo o input de string para valor numérico:
+            var numero = Number(txt_numero.value)
+
+            var mensagem1 = window.document.getElementById('msg1')
+            var mensagem2 = window.document.getElementById('msg2')
+            var mensagem3 = window.document.getElementById('msg3')
+
+            mensagem1.innerText = `O dobro de ${numero} é ${numero * 2}`
+           
+            mensagem2.innerText = `O triplo de ${numero} é ${numero * 3}`
+            
+            mensagem3.innerText = `A raiz quadrada de ${numero} é ${(numero ** (1/2)).toFixed(2)}`
+
+            txt_numero.value = ``
+            txt_numero.focus()
+        }
+
+    </script>
+</body>
+</html>

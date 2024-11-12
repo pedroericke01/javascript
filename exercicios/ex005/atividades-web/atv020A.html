@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercício20</title>
+    <style>
+        #painel_nomes{
+            width: 185px;
+            padding:5px;
+            margin-left: 48px;
+        }
+    </style>
+</head>
+<body>
+    <h1>contando letras</h1>
+
+    <p>
+        Nome:
+        <input type="text" name="txt_nome" id="txt_nome">
+        <input type="button" value="Cadastrar" onclick="cadastrar()">
+    </p>
+
+    <!-- criando um dataframe/painel que exibe dados em html5, os dados presentes
+    desse painel, na tag <option> serão criados dinamicamente pelo javascript:-->
+    <select name="painel_nomes" id="painel_nomes" size="5"></select>
+
+    <!-- criando a estrutura que vai exibir o resultado final do processamento
+    do javascript:-->
+    <div id="res">
+        <p></p>
+    </div>
+
+    <script>
+        /* criando a principal estrutura de dados que vai armazenar os nomes
+        inseridos pelo usuário no sistema, no máximo 5 nomes: */
+        var lista_nome = []
+
+        /* função que busca um elemento, nesse caso, nome de alguem dentro de
+        uma estrutura de dados.
+        vamos verificar se um determinado nome ja existe ou não, ou se o input do
+        usuário for vazio, caso sim, esse 
+        nome não será válido, caso não, será válido para o cadastramento. */
+        function nome_valido(nome, lista){
+            if(nome.length == 0){
+                return false    
+            } else if(lista.indexOf(nome) != -1){
+                /* nome ja existe na lista! */
+                return false
+            } else{
+                /* nome não existe na lista! */
+                return true
+            }
+        }
+
+        /*função que controla o tamanho da lista de nomes, no máximo so pode 
+        possuir até 5 nomes:  */        
+        function possivel_cadastro(lista){
+            /* sabendo que o tamanho da lista começa em zero(0), de 0 a 4 
+            temos 5 elementos; */
+            if(lista.length <= 4){
+                return true
+            } else{
+                return false
+            }
+        }
+        
+        /* criando a principal função do sistema: */
+        function cadastrar(){
+            /* ligando as tags nome e a div res que vai exibir o resultado
+            final processado pelo javascript: */
+            var txt_nome = window.document.getElementById('txt_nome')
+            var painel_nomes = window.document.getElementById('painel_nomes')
+            
+            /* extraindo o dado inserido pelo usuário no sistema: */
+            var nome = (txt_nome.value)
+
+            /* validando a possibilidade de cadastrar novos nomes dentro da 
+            estrutura principal dos dados: */
+            let resp_possib_cadastro = possivel_cadastro(lista_nome)
+            
+            if(resp_possib_cadastro == false){
+                window.alert('[ERRO!]numero máximo de cadastros alcançado!')
+            } else{
+                /* caso seja possivel realizar novos cadastros: */
+                let resp_nome = nome_valido(nome, lista_nome)
+                
+                if(resp_nome == false){
+                    window.alert('[ERRO!]nome ja cadastrado no sistema/inválido!')
+                } else{
+                    /* caso o nome não exista na estrutura de dados e não seje vazio,
+                    então vamos:*/
+
+                    //1-adicionar o novo nome no final da estrutura de dados;
+                    lista_nome.push(nome)
+
+                    //2-criar a tag option dinamicamente;
+                    let novo_cadastro = window.document.createElement('option')
+
+                    //3-atribuir o nome válido a tág option;
+                    novo_cadastro.innerText = `${nome}`
+
+                    //4-exibir esse novo cadastro no painel de dados;
+                    painel_nomes.appendChild(novo_cadastro)
+
+                    //limpar o campo de input nome:
+                    txt_nome.value = ``
+
+                    /* invocando o procedimento que retorna o processamento
+                    final do sistema para o usuário: */
+                    mensagem_final()
+                }
+            }
+        }
+ 
+        /* processo para exibir a mensagem final do processamento do sistema: */
+        function mensagem_final(){
+
+            /* garantindo que essa mensagem aconteça somente quando a lista do
+            sistema esteja completamente cheia: */
+            if(lista_nome.length == 5){
+                /* ligando a div que vai exibir a mensagem final processada
+                pelo sistema: */
+                var mensagem = window.document.querySelector('#res>p')
+                
+                /* fazendo um escolha aleatória de um nome existente na estrutura: */
+                let escolha_sistema = parseInt(Math.random()*lista_nome.length)
+                
+                /* extraindo esse nome e tranformando-o em uma string */
+                let nome = String(lista_nome[escolha_sistema])
+                
+                /* quebrando a string do nome em substrings e separei as mesmas em carac
+                teres de espaços vazios, todo espaço vazio será desconsiderado como 
+                contável: */
+                let espaco_vazio = nome.split(' ').length -1
+                
+                /* imprimindo o resultado final processado pelo sistema e exibindo-o
+                para o usuário: */
+                mensagem.innerHTML = `O nome ${nome} possui ${(nome.length) - espaco_vazio} caracteres.`
+            }
+        }
+    </script>
+</body>
+</html>

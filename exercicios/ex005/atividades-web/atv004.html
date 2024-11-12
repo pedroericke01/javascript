@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quando você nasceu?</title>
+</head>
+<body>
+   <h1>Me fala sobre a data do seu nascimento</h1>
+   
+    Dia: <input type="number" name="txt_dia" id="txt_dia"> <br>
+
+    Mês: <input type="text" name="txt_mes" id="txt_mes"> <br>
+
+    Ano: <input type="number" name="txt_ano" id="txt_ano">
+
+    <input type="button" value="enviar" onclick="analisar()">
+
+   <div id="res">Resultado</div>
+
+   <script>
+        
+    function analisar(){
+        /*
+        ligando as principais tags do sistema para executar a interação com js
+        com auxilio da arvore DOM
+        */
+        var txt_dia = window.document.getElementById('txt_dia')
+        var txt_mes = window.document.getElementById('txt_mes')
+        var txt_ano = window.document.getElementById('txt_ano')
+        
+        var resultado = window.document.getElementById('res')
+        
+        /*
+        todo input sempre vira como uma string digitada pelo usuário por padrão.
+        sabendo disso, precisaremos converter para valor numérico(quando necessario)
+        e extrair o valor digitado pelo usuário:
+        */
+        var dia = Number(txt_dia.value)
+        
+        //sabendo que o mês será uma string que meu usuário deverá inserir e nao
+        //um valor numérico, dessa forma, basta apenas extrair o dado inserido pelo
+        //usuario:
+        var mes = txt_mes.value
+        
+        //a variável ano será um input numérico, então eu preciso converter de 
+        //string para numerico e extrair o dado inserido pelo usuário:
+        var ano = Number(txt_ano.value)
+        
+        resultado.innerText = `Você nasceu no dia ${dia} do mês de ${mes} no ano ${ano}`
+
+    }    
+    
+   </script>
+</body>
+</html>

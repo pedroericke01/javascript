@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Compra</title>
+</head>
+<body>
+
+    <h1>Simulando um sistema de compra</h1>
+    
+    <p>
+        preço do produto: <input type="number" name="txt_preco" id="txt_preco">
+    </p>
+
+    <p>
+        quantidade: <input type="number" name="txt_quantidade" id="txt_quantidade">
+    </p>
+
+    <p>
+        Forma de Pagamento: 
+        <input type="radio" name="txt_pagamento" id="txt_avista" checked>
+        <label for="txt_avista">A vista</label>
+
+        <input type="radio" name="txt_pagamento" id="txt_credito">
+        <label for="txt_credito">Cartão de Crédito</label>
+    </p>
+
+    <input type="button" value="comprar" onclick="calcular()">
+
+    <div id="res"></div>
+
+    <script>
+        function calcular(){
+            var txt_preco = window.document.getElementById('txt_preco')
+            
+            var txt_quantidade = window.document.getElementById('txt_quantidade')
+            
+            //convertendo os inputs de string para valores numéricos e extraindo
+            //seus respectivos dados internos:
+            var preco = Number(txt_preco.value)
+            var quantidade = Number(txt_quantidade.value)
+
+            //calculando o total da compra e forçando esse total a ter no maximo
+            //2 casas decimais:
+            var total = (preco*quantidade).toFixed(2)
+
+            /*validando os dados numéricos inseridos pelo usuário, seguindo o
+            parâmetro de que os valores não podem ser negativos:*/
+            if (preco <= 0 || quantidade <= 0){
+                window.alert('[ERRO!]revise os dados e tente novamente!')
+            } else{
+
+                var forma_pagamento = window.document.getElementsByName('txt_pagamento')
+                
+                var mensagem = window.document.getElementById('res')
+                
+            /*
+                validando a forma de pagamento escolhida pelo usuário com base nos
+                seguintes requisitos:
+                1-pagamentos a vista recebem 7% de desconto;
+                2-pagamentos parcelado cobram 5% de taxa;
+                3- atualmento so existem pagamentos parcelado ou a vista no sistema;
+            */
+            
+                if(forma_pagamento[0].checked){
+                    let desconto = (total * 0.07).toFixed(2)
+                    let total_desconto = (total - desconto)
+
+                    mensagem.style.marginTop = '5px'
+                    mensagem.innerText = `Total: R$${total} - 7% de desconto p/ pagamento a vista = R$${total_desconto}`
+
+                } else if(forma_pagamento[1]){
+                    let taxa = (total * 0.05)
+                    let total_taxa = (Number(total) + Number(taxa)).toFixed(2)
+
+                    mensagem.style.marginTop = '5px'
+                    mensagem.innerText = `Total: R$${total} + 5% de juros por parcelamento = R$${total_taxa}`
+                } else{
+                    window.alert('[ERRO!]revise os dados e tente novamente!')
+                }
+                
+                txt_preco.value = ``
+                txt_quantidade.value = ``
+            }
+        }
+        
+    </script>
+
+</body>
+</html>

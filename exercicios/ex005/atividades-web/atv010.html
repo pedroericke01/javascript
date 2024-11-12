@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Média do Aluno</title>
+</head>
+<body>
+
+    <h1>Média do Aluno</h1>
+
+    <p>
+        Nota do Primeiro Bimestre: <input type="number" name="txt_b1" id="txt_b1">
+    </p>
+
+    <p>
+        Nota do Segundo Bimestre: <input type="number" name="txt_b2" id="txt_b2">
+    </p>
+
+    <p>
+        Nota do Terceiro Bimestre: <input type="number" name="txt_b3" id="txt_b3">
+    </p>
+
+    <p>
+        Nota do Quarto Bimestre: <input type="number" name="txt_b4" id="txt_b4">
+
+        <input type="button" value="Enviar" onclick="verificar()">
+    </p>
+
+    <div>
+        <p id="msg_media"></p>
+        <p id="msg_resultado"></p>
+    </div>
+
+    <script>
+
+        function verificar(){
+            
+            /*ligando os 4 inputs do usuário no html5 ao script para gerar o resultado
+            esperado pelo usuário no sistema:*/
+            var txt_b1 = window.document.getElementById('txt_b1')
+            var txt_b2 = window.document.getElementById('txt_b2')
+            var txt_b3 = window.document.getElementById('txt_b3')
+            var txt_b4 = window.document.getElementById('txt_b4')
+            
+            /*convertendo os dados inseridos no input de string(padrão) para valor
+            numérico e extraindo o respectivo dado*/
+            var b1 = Number(txt_b1.value)
+            var b2 = Number(txt_b2.value)
+            var b3 = Number(txt_b3.value)
+            var b4 = Number(txt_b4.value)
+            
+            /*validação dos dados inseridos pelo usuário onde:
+            1-o usuário não pode colocar numeros menores que 0;
+            2-o usuário não pode colorar numeros > 10;
+            */ 
+            if(b1 < 0 || b2 < 0 || b3 < 0 || b4 < 0){
+                window.alert('[ERRO!]revise os dados e tente novamente!')
+            } else if(b1 > 10 || b2 > 10 || b3 > 10 || b4 > 10){
+                window.alert('[ERRO!]revise os dados e tente novamente!')
+            } else{
+
+                //criando variavel que vai armazenar a média do aluno, forçando ela
+                //a ter apenas 2 casas decimais:
+                var media = (b1+b2+b3+b4) / 4 .toFixed(2)
+                
+                //ligando os 2 paragrafos que vão exibir a média e o status do aluno:
+                var mensagem_media = window.document.getElementById('msg_media')
+                var mensagem_resultado = window.document.getElementById('msg_resultado')
+
+                /*validando o status do usuário segundo sua média inserida 
+                e exibindo sua média e status do aluno respectivamente, seguindo os
+                parâmetros:
+                1-media maior que 6, aprovado;
+                2-media igual a 6, em recuperação;
+                3-media menor que 6, reprovado;
+                */
+                if(media > 6){
+                    mensagem_media.innerText = `Sua média é: ${media}`
+                    mensagem_resultado.innerText = `Você está: APROVADO!`
+                } else if(media == 6){
+                    mensagem_media.innerText = `Sua média é: ${media}`
+                    mensagem_resultado.innerText = `Você está: EM RECUPERAÇÃO!`
+                } else{
+                    mensagem_media.innerText = `Sua média é: ${media}`
+                    mensagem_resultado.innerText = `Você está: REPROVADO!`
+                }
+                
+                /*automatizando a limpeza dos campos de input após o usuário inserir
+                os dados e clicar em enviar para ativar a função:*/
+                txt_b1.value = ``
+                txt_b2.value = ``
+                txt_b3.value = ``
+                txt_b4.value = ``
+
+                txt_b1.focus()
+                txt_b2.focus()
+                txt_b3.focus()
+                txt_b4.focus()
+
+            }
+        }
+    </script>
+
+</body>
+</html>

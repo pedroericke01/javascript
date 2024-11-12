@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercício 23</title>
+</head>
+<body>
+
+    <h1>Simulando Empréstimo</h1>
+    
+    <p>Renda Mensal:<input type="number" id="txt_renda">
+
+    <p>Valor Imóvel:<input type="number" id="txt_valor_imovel"></p>
+    
+    <p>
+        Vezes de parcelamento:<input type="number" id="txt_vezes_parcelamento">
+        <input type="button" id="botao" value="Simular">
+    </p>
+
+    <div id="res">
+        <p id="msg1"></p>
+        <p id="msg2"></p>
+        <p id="msg3"></p>
+    </div>
+    
+    <script>
+        /* função para validar os inputs numéricos do usuário garantindo que sejam 
+        inseridos valores > 0 */
+        function numero_valido(numero){
+            if(numero > 0){
+                return true;
+            }else{
+                return window.alert('[ERROR!]insira numeros válidos maiores do que zero!');
+            }
+        }
+
+        /* função para validar o parcelamento de um impŕestimo que deverá ser > que 0 e
+        menor que 48: */
+        function parcelamento_valido(callback, quant_parcelas){
+            
+            if(callback == true){
+                /* garantindo que o input do usuário seja menor ou igual a 48x */
+                if(quant_parcelas <= 48){
+                    return true;
+                }else{
+                    return window.alert('[ERROR!]Numero de parcelamento inválido!');
+                }
+            }
+        }
+
+        /* captudando os 3 inputs principais do sistema: */
+        var txt_renda = window.document.getElementById('txt_renda');
+        var txt_valor_imovel = window.document.getElementById('txt_valor_imovel');
+        var txt_vezes_parcelamento = window.document.getElementById('txt_vezes_parcelamento');
+        
+        /* capturando o botão principal, através dele que todo o script será ativado
+        e a iteração com o sistema e usuáiro vai começar: */
+        const botao = window.document.getElementById('botao') 
+        /* adicionando função CallBack nesse elemento, onde após o usuário clicar nesse
+        elemento que a função callback será ativada: */
+        botao.addEventListener("click", ()=>{
+
+            /* capturar os 3 inputs numéricos e tocar nos dados desses inputs,
+            garantindo que sejam do formato nunmérico para proseguirmos no sistema: */
+            const renda = Number(txt_renda.value);
+            const valor_imovel = Number(txt_valor_imovel.value);
+            const vezes_parcelamento = Number(txt_vezes_parcelamento.value);
+
+            let analise1 = numero_valido(renda);            
+            let analise2 = numero_valido(valor_imovel);
+            let analise3 = parcelamento_valido(numero_valido(vezes_parcelamento), vezes_parcelamento);
+
+            /* validando que somente numero válidos conseguiram avançar no sistema: */
+            if(analise1 != true || analise2 != true || analise3 != true){
+                window.alert('[ERROR!]revise os dados e tente novamente!');
+            }else{
+                /* criando a variável que vai de maneira Dinâmica gerar a mensagem
+                no front end do meu usuário: */
+                let mensagem1 = window.document.getElementById('msg1');
+                let mensagem2 = window.document.getElementById('msg2');
+                let mensagem3 = window.document.getElementById('msg3');
+            
+                let tot_parcelas = Math.ceil((valor_imovel/vezes_parcelamento));
+
+                let meta_aprovacao = Math.floor((30/100)*renda);                
+
+                /* o empréstimo poderá ser aprovado apenas se o total das parcelas
+                for menor que a meta para aprovação: */
+                if(tot_parcelas <= meta_aprovacao){
+                    mensagem1.innerText = 'Empréstimo APROVADO!';
+                    mensagem2.innerText = `Serão ${vezes_parcelamento} parcelas de R$${tot_parcelas}`;
+                    mensagem3.innerText = `Aproveite seu novo imóvel!`;
+
+                }else{
+                    mensagem1.innerText = `Empréstimo REPROVADO!`;
+                    mensagem2.innerText = `Ficariam ${vezes_parcelamento} parcelas de R$${tot_parcelas}, excedendo sua meta para aprovação de R$${meta_aprovacao}!`;   
+                    mensagem3.innerText = `Tente parcelando em até 48x`
+                }
+                txt_renda.value = ''
+                txt_valor_imovel.value = ''
+                txt_vezes_parcelamento.value = ''
+
+                mensagem1.value = '';
+                mensagem2.value = '';
+                mensagem3.value = '';
+            }
+        })
+    </script>
+
+</body>
+</html>

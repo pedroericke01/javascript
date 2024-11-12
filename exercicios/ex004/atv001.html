@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Somando Valores</title>
+</head>
+<body>
+    <h1>Operação Aritmetica com Javascript</h1>
+
+    <!-- criando 2 inputs do tipo number, que permitirá o usuário digitar numeros.-->
+    <input type="number" name="txtn1" id="txtn1"> + 
+    <input type="number" name="txtn2" id="txtn2">
+    
+    <!--criando um input do tipo botão que permitirá o usuário clicar, para executar
+    um determinado evento:-->
+    <input type="button" value="somar" onclick="somar()">
+
+    <div id="resultado">Resultado</div>
+    
+
+    <script>
+        function somar(){
+
+            //ligando os 2 valores inseridos pelo usuário ao meu script:
+            var num1 = window.document.getElementById('txtn1')
+            var num2 = window.document.getElementById('txtn2')
+
+            //ligando a variável que vai exibir o resultado da soma entre os numeros
+            //inseridos pelo usuário:
+            var res = window.document.getElementById('resultado')
+            
+            /*
+            quando o usuário insere dados em inputs, esses vem por padrão no
+            formato de string, dessa forma, será necessário converte-los para o formato
+            numérico.
+            */
+            var n1 = Number(num1.value)
+            var n2 = Number(num2.value)
+            
+            var soma = (n1 + n2)
+
+            res.innerHTML = `O Resultado da soma será: ${soma}`
+
+        }
+    </script>
+</body>
+
+
+</html>

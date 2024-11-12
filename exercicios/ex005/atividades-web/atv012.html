@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor Monetário</title>
+</head>
+<body>
+    <h1>Conversos Monetário</h1>
+
+    <p>
+        Digite seu Salário: <input type="number" name="txt_salario" id="txt_salario">
+
+        <input type="button" value="converter" onclick="converter()">
+    </p>
+    
+    <div id="msg">
+        <p></p>
+    </div>
+
+    <script>
+        function converter(){
+
+            var txt_salario = window.document.getElementById('txt_salario')
+            
+            var mensagem = window.document.querySelector('#msg > p')
+            
+            //convertendo uma string em uma variável com valor numérico:
+            var salario = Number(txt_salario.value).toFixed(2)
+            
+            //o salario do usuário não pode ser valor negativo e nem menor que
+            //zero:
+            if(salario <= 0){
+                window.alert('[ERRO!]revise os dados e tente novamente!')
+            } else{
+                var quant_dolar = (salario / 5.72).toFixed(2)
+                mensagem.innerHTML = `Com R$${salario} você consegue comprar US$${quant_dolar} Dolares!`
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exercício 17</title>
+</head>
+<body>
+    <h1>Convertendo Valores com ponto flutuante para Valores Inteiros:</h1>
+
+    <p>
+        Numero:
+        <input type="number" name="txt_numero" id="txt_numero">
+
+        <input type="button" value="converter" onclick="converter()">
+
+    </p>
+    
+
+    <div id="res">
+        <p></p>
+    </div>
+
+    <script>
+        function converter(){
+            /*
+            fase1:
+            acessar a arvode DOM e mexer no dado que será inserido pelo usuário no
+            input numero:
+            
+            fase2:
+            acessando a arvore DOM e tocando na principal DIV e no parágrafo
+            que vai exibir o resultado final processado pelo sistama:
+            */
+            var txt_numero = window.document.getElementById("txt_numero")
+            
+            var resultado = window.document.querySelector('#res>p')
+
+            /*
+            convertendo o input do usuário de String para valor numérico e 
+            extraindo o respectivo dado inserido pelo usuário:
+            */
+            var numero = Number(txt_numero.value).toFixed(2)
+            
+            /*convertendo o valor numérico acima de Float para Int: */
+            var numero_inteiro = parseInt(numero)
+
+            resultado.innerText = `O numero ${numero} convertido para inteiro é ${numero_inteiro}`
+        }
+    </script>
+</body>
+</html>

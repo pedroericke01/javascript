@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aprendendo DOM</title>
+    <style>
+        body{
+            background-color: gainsboro;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            font-weight: normal;
+        }
+    </style>
+</head>
+<body>
+    <h1>Iniciando estudos sobre DOM</h1>
+
+    <p>
+        Aqui vai o resultado!
+    </p>
+
+    <p>
+        Aprendendo a usar <strong>DOM</strong> em javascript
+    </p>
+
+    <div>
+        <p id ='mensagem'>clique em mim!</p>
+    </div>
+
+    <script>
+        /*
+        me permite tocar em um objeto/elemento da arvore DOM, nesse modelo de seleção:
+        
+        I-window.document.getElementsByTagName()[]:conseguiremos tocar em + de 1 elemento
+        por vez com base na sua tag em html5.
+        no caso da necessidade de tocar em apenas 1 elemento, devemos seguir a arvore dom
+        e sua hierarquia, especificando a posição do elemento específico.
+
+        II-variavel.innerText:permite exibir o conteúdo textual dentro da determinada variável.
+        
+        III-window.document.getElementById():me permite tocar em um elemento específico
+        que possua ID, comom no caso para estilizações em css3.
+
+        IV-window.document.getElementsByClassname():me permite tocar em uma classe
+        de elementos no html, com base nas classes estilizadas no css3.
+        
+        V-window.document.querySelector():me permite tocar nos elementos, sejam 
+        id(#) ou class(.) do css3.
+        
+        */
+        var primeiro_p = window.document.getElementsByTagName('p')[0]
+        
+            primeiro_p.style.color= "white"
+
+            window.document.write(`Esta escrito assim: ${primeiro_p.innerText}`)
+
+        var msg = window.document.getElementById('mensagem')
+            //alterando a estilização css3 por meio do javascript
+            msg.style.color="blue"
+            msg.style.background="yellow"
+
+            //modificando o conteúdo do elemento selecionado acima, com javascript:
+            msg.innerText="Olá mundo! javascript é muito legal"
+
+    </script>
+
+</body>
+</html>

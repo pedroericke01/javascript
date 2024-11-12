@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula006</title>
+</head>
+<body>
+    <h1>Olá mundo!</h1>
+    
+    <br>
+    
+    <h2>Atividade 002</h2>
+</body>
+
+<script>
+    /*criando 2 prompt que recebe 2 numeros do usuário e realiza a soma dos mesmos:
+    
+    1-o comando 'window.prompt() retorna uma string por padrão, independente do input
+    do usuário'
+    
+    2-o caractere:'+' serve para:
+    I-(number + number):soma;
+    
+    II-(string + string):concatenação;
+    
+    ou seja, para realizar a soma dos numeros inseridos pelo usuário eu preciso
+    especificar ao javascript que esses inputs serão de 2 numeros inteiros:
+    
+    3-as funções:
+    I-Number.parseInt():converte uma variável(passada como parâmetro) em um numero
+    inteiro.
+
+    II-Number.parseFloat(): converte uma varoiável(passada como parâmetro) em um numero
+    com pontos flutuantes(virgula).
+    
+    III-Number():converte uam variável (passada como parâmetro) em um numero, seja
+    inteiro ou com ponto flutuantes.
+
+    */
+   
+    var n1 = Number.parseInt(window.prompt("Digite o primeiro numero:"))
+    var n2 = Number.parseInt(window.prompt("Digite o segundo numero:"))
+
+    var soma = (n1+n2)
+
+    window.alert("O resultado da soma será:" +soma)
+
+</script>
+</html>

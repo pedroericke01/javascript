@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exemplo Detran</title>
+</head>
+<body>
+    <h1>Sistemas de Multas</h1>
+    <!--criando 3 inputs onde o usuário vai inserir dados e o sistema vai captá-los-->
+    
+    Velocidade do Carro: <input type="number" name="vel.carro" id="vel.carro">km/h
+    
+    <input type="button" value="Verificar" onclick="calcular()">
+
+    <div id="res">Resultado</div>
+
+    <script>
+        //ligando os 2 elementos de input e de exibição dos resultados ao script:
+        var txt_velocidade = window.document.getElementById('vel.carro')
+        var resultado = window.document.getElementById('res')
+        
+        
+        function calcular() {
+            //convertendo a string do txt_velocidade(que vem por padrão pelos inputs)
+            velocidade = Number(txt_velocidade.value)
+
+            resultado.innerText = `Sua velocidade atual: ${velocidade}km/h`
+
+            if (velocidade > 60){
+                resultado.innerText = 'Você foi MULTADO!'
+            } else{
+                resultado.innerText = 'Dirija sempre usando o cinto de segurança'
+            }
+        }
+    </script>
+</body>
+</html>

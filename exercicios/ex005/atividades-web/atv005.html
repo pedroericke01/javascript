@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Saudações</title>
+</head>
+<body>
+    <h1>Saudações para todos os usuários</h1>
+
+    <input type="number" name="txt_hora" id="txt_hora">
+    <input type="button" value="enviar" onclick="verificar()">
+
+    <div id="res">Resultado</div>
+
+    <script>
+        //criando uma função em javascript//
+        function verificar(){
+            //vinculando as principais variáveis do sistema no script, interligando
+            //minhas interfaces interativas do sistema//
+            var txt_hora = window.document.getElementById('txt_hora')
+            var resultado = window.document.getElementById('res')
+
+            //convertendo os valores do input que vem no formato de string por padrão
+            //para um formato numerico e extraindo o respectivo dado inserido pelo usuário
+            //nesse input:
+            var hora = Number(txt_hora.value)
+
+            //gerando as saudações de bom dia, boa tarde e boa noite para o usuário
+            //segundo o horario informado pelo usuário no input:
+            if (hora < 12){
+                resultado.innerText = 'BOM DIA!'
+            } else if (hora == 12 || hora <= 18) {
+                resultado.innerText = 'BOA TARDE!'
+            } else{
+                resultado.innerText = 'BOA NOITE!'
+            }
+        }
+
+    </script>
+</body>
+</html>

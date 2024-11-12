@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula006</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            font-weight: normal;
+
+        }
+    </style>
+</head>
+<body>
+    <h1>Atividade004</h1>
+    
+</body>
+
+<script>
+    /*
+    Manipulando Strings no javascript:
+
+    1-variavel.length(): informa o tamanho da string, como o len() do python.
+    
+    2-variável.toUpperCase(): converte toda a string para caracteres maiúsculos, 
+    como a função variavel.Upper() do python.
+
+    3-variavel.toLowerCase(): converte toda a string para caracteres minúsculas,
+    como a funnção variavel.Lower() do python.
+
+    2-a função:
+    I-document.write(): permite escrever dentro do html determinada string passada
+    como parâmetro.
+    com essa função conseguiremos utilizar tags html5 em conjunto com a string que
+    será passada como parâmetro na função:
+
+    */
+   
+    var nome = window.prompt("Qual é o seu nome?")
+
+    document.write(`<br>Olá <strong>${nome}</strong> o seu nome tem ${nome.length} letras ao todo!</br>`)
+    
+    document.write(`<br>Seu nome em letras maiusculas é: ${nome.toUpperCase()}</br>`)
+
+    document.write(`<br>Seu nome em letras minusculas é: ${nome.toLowerCase()}</br>`)
+
+</script>
+</html>

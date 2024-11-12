@@ -1,0 +1,13 @@
+um código Assíncrono leva um tempo para ser executado, esse código/requisição pode
+ser bem sucedida ou não.
+
+exemplo da utilização de códigos assíncronos:
+1- consumo de dados em servidores remotos através de uma rede como a internet;
+2- consumo de uma base de dados em algum servidor remoto;
+3- Comunicação do Front End com o Back End da aplicação, através das chamadas para API;
+4- interações com Banco de Dados;
+
+existem 3 maneiras de lidar com Codigos Assíncronos:
+1-CallBacks;
+2-Promisses;
+3-Promisses com Async/await;

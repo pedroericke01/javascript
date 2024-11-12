@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aula006</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 20px;
+            font-weight: normal;
+
+        }
+    </style>
+</head>
+<body>
+    <h1>Atividade005</h1>
+    
+</body>
+
+<script>
+    /*
+    Manipulando Strings no javascript:
+    criando uma janela com prompt que permitirá ao usuário digitar seu salário.
+    no final, vamos informar seu salário com 2 casas decimais e 
+    com a seguinte maneira:R$000.00
+    através das seguintes funções respectivamente:
+    
+    I-variavel.toFixed():me permite passar o n de casas decimais que um numero deverá
+    ter (esse dado será passado como parâmetro).
+
+    II-variavel.toFixed().replace('A', 'B'):o metodo 'replace()' me permite trocar
+    uma string A para uma string B. semelhante na linguagem python.
+
+    III-variavel.toLocaleString():permite criar uma string localizada por parte do
+    mundo.
+    como parâmetro dessa função, conseguiremos informar que essa string está 
+    localizada no brasil:"pt-br".
+    assim como a estilização em css de como essa string deverá ser formatada:
+    {style: 'currency', 'currency: 'BRL' '}
+    OBSERVE:
+    
+    variavel.toLocaleString('pt-br', {style: 'currency', 'currency: 'BRL''})
+    
+    */
+   
+    var salario = Number(window.prompt("Quanto é o seu salário?"))
+
+    document.write(`<br>Seu salário é: ${salario} </br>`)
+    
+    document.write(`<br>Esse é seu salario com 2 casas decimais: ${salario.toFixed(2)}</br>`)
+
+    document.write(`<br>Esse é seu salário com ponto: ${salario.toFixed(2)} esse agora é seu salário com Virgula: ${salario.toFixed(2).replace('.', ',')}</br>`)
+
+    document.write(`<br>Esse é seu salário formatado em Real: ${salario.toLocaleString('pt-BR', {style: 'currency', 'currency': 'BRL'})}</br>`)
+
+</script>
+</html>

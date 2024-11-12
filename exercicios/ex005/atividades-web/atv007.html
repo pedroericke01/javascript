@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora Básica</title>
+</head>
+<body>
+    <h1>Calculadora Básica</h1>
+    
+    <p>
+        Primeiro Numero: <input type="number" name="txt_num1" id="txt_num1">
+    </p>
+
+    <p>
+        Segundo Numero: <input type="number" name="txt_num2" id="txt_num2">
+    </p>
+   
+    <p>
+        Operação:
+        
+        <input type="radio" name="txt_operacao" id="txt_somar" checked>
+        <label for="txt_somar">Somar</label>
+        
+        <input type="radio" name="txt_operacao" id="txt_subtrair">
+        <label for="txt_subtrair">Subtrair</label>
+
+        <input type="radio" name="txt_operacao" id="txt_multiplicar">
+        <label for="txt_multiplicar">Multiplicar</label>
+        
+        <input type="radio" name="txt_operacao" id="txt_dividir">
+        <label for="txt_dividir">Dividir</label>
+    </p>
+
+    <input type="button" value="calcular" onclick="calcular()">
+
+    <p id="res"></p>
+
+    <script>
+
+        function somar(n1, n2){
+            let soma = (n1+n2)
+            return soma
+        }
+        function subtrair(n1, n2){
+            let subtracao = (n1-n2)
+            return subtracao
+        }
+        function multiplicar(n1, n2){
+            let multiplicacao = (n1*n2)
+            return multiplicacao
+        }
+        function dividir(n1, n2){
+            let divisao = (n1/n2)
+            return divisao
+        }
+        
+        function calcular(){
+            /*
+            atribuído ao input da Radio é o mesmo, dessa forma, como temos varios
+            elementos com o mesmo nome, esses serão tratados como uma lista de N
+            posições internas.
+
+            isso me permitirá selecionar apenas 1 das N possibilidades de marcações,
+            assim como na execução do script corretamente.
+
+            para toca-los, vamos utilizar o metodo document.getElementByName('')[]: 
+            precisaremos informar a posição do elemento específico, como em listas
+            do python, de 0 a N posições:
+            */
+            
+            var mensagem = window.document.getElementById('res')
+            
+            var operacao = window.document.getElementsByName('txt_operacao')
+
+            var txt_num1 = window.document.getElementById('txt_num1')
+            var txt_num2 = window.document.getElementById('txt_num2')
+
+            //convertendo as duas strings em valores numéricos e extraindo seus
+            //respectivos valores inseridos:
+            var num1 = Number(txt_num1.value)
+            var num2 = Number(txt_num2.value)
+            
+            if(operacao[0].checked){
+                let resultado = somar(num1, num2)
+                mensagem.innerText = `O resultado de: ${num1} + ${num2} é: ${resultado}`
+
+            } else if (operacao[1].checked){
+                let resultado = subtrair(num1, num2)
+                mensagem.innerText = `O resultado de: ${num1} - ${num2} é: ${resultado}`
+
+            } else if(operacao[2].checked){
+                let resultado = multiplicar(num1, num2)
+                mensagem.innerText = `O resultado de: ${num1} * ${num2} é: ${resultado}`
+
+            } else if (operacao[3].checked){
+                let resultado = dividir(num1, num2)
+                mensagem.innerText = `O resultado de: ${num1} / ${num2} é: ${resultado}`
+
+            } else{
+                window.alert('[ERRO!]revise os dados e tente novamente!')
+            }
+
+        }
+
+    </script>
+</body>
+</html>

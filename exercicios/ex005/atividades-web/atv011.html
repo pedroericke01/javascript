@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Conversor de medidas</title>
+</head>
+<body>
+    <h1>Conversor de medidas</h1>
+    <p>
+        Medida em Metros: <input type="number" name="txt_metros" id="txt_metros">
+
+        <input type="button" value="Verificar" onclick="verificar()">
+    </p>
+    
+    <div>
+        <p id="msg1"></p>
+        <p id="msg2"></p>
+    </div>
+
+    <script>
+        function verificar(){
+            var txt_metros = window.document.getElementById('txt_metros')
+            
+            var metros = Number(txt_metros.value)
+
+            //os metros não poderão ser valores negativos:
+            if(metros < 0){
+                window.alert('[ERRO!]revise os dados e tente novamente!')
+            }else{
+                var mensagem_centimetros = window.document.getElementById('msg1')
+                var mensagem_milimetros = window.document.getElementById('msg2')
+
+                var centimetros = (metros * 100)
+                var milimetros = (metros * 1000)
+
+                mensagem_centimetros.innerText = `A medida de ${metros} metros corresponde á: ${centimetros} centimetros`
+
+                mensagem_milimetros.innerText = `A medida de ${metros} metros corresponde á: ${milimetros} milimetros`
+            }
+
+            txt_metros.value = ``
+            
+            txt_metros.focus()
+           
+        }
+    </script>
+
+</body>
+</html>

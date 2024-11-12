@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>exercício20</title>
+    <style>
+        #painel_nomes{
+            width: 185px;
+            padding:5px;
+            margin-left: 48px;
+        }
+    </style>
+</head>
+<body onload="exibir_painel(lista_nome)">
+
+    <h1>contando letras</h1>
+
+    <p>
+        Nome:
+        <input type="text" name="txt_nome" id="txt_nome" placeholder="escolha um nome">
+        <input type="button" value="Escolher" onclick="escolher()">
+    </p>
+
+    <!-- criando um dataframe/painel que exibe dados em html5, os dados presentes
+    desse painel, na tag <option> serão criados dinamicamente pelo javascript:-->
+    <select name="painel_nomes" id="painel_nomes" size="5"></select>
+
+    <!-- criando a estrutura que vai exibir o resultado final do processamento
+    do javascript:-->
+    <div id="res">
+        <p></p>
+    </div>
+
+    <script>
+        /* criando a principal estrutura de dados que vai armazenar os nomes
+        inseridos pelo usuário no sistema, no máximo 5 nomes: */
+        var lista_nome = ['pedro', 'eva', 'nycolas', 'matheus', 'felipe']
+        
+        /*criando um porcedimento que vai percorrer a principal estrutura de
+        dados e para cada elemento existente vamos criar uma tag option e colocá-la
+        dentro do painel de dados:
+        esse procedimento vai ser executado todas as vezes que minha página for
+        carregada ou atualizadada:*/
+        function exibir_painel(lista){
+            /* ligando o painel de dados ao meu script js */
+            var painel_nomes = window.document.getElementById('painel_nomes')
+            /* criando um loop que percorre toda a estrutura de dados e 
+            para cada elemento existente na mesma vamos criar uma tag option 
+            atribui o valor do elemento á tag option e adiciona-la sempre ao
+            final do painel de dados: */
+            for(let cont = 0; cont<lista.length; cont+=1){
+                let novo_cadastro = window.document.createElement('option')
+                novo_cadastro.innerHTML = `${lista[cont]}`
+                painel_nomes.appendChild(novo_cadastro)
+            }
+        }
+
+        /* função que verifica se o nome escolhido pelo usuário existe ou não 
+        dentro da minha estrutura de dados: */
+        function nome_valido(nome, lista){
+            if(nome.length == 0){
+                /* nome inválido */
+                return false
+            } else if(lista.indexOf(nome) == -1){
+                /* nome não existe na lista, portanto, como não podemos adicionar
+                outros, a busca é inválida! */
+                return false
+            } else{
+                /* o nome existe na lista, portanto a busca é verdadeira */
+                return true
+            }
+        }
+
+        /* criando a principal função do sistema: */
+        function escolher(){
+            /* ligando as tags para o input do nome no html5 ao javascript */
+            var txt_nome = window.document.getElementById('txt_nome')
+            
+            var nome = (txt_nome.value)
+
+            /* ativando função que analisa se o nome inserido pelo usuário existe
+            ou não dentro da minha estrutura de dados: */
+            var res_nome = nome_valido(nome, lista_nome)
+
+            if(res_nome == false){
+                window.alert(['[ERRO!]nome inválido/não existe na base de dados.'])
+            } else{
+                /* ligando a div do html5 que vai exibir ao usuário o resultado 
+                do processamento final do programa: */
+                let mensagem = window.document.querySelector('#res>p')
+                
+                /* quebrando a string nome em substring e cada caractere de espaço
+                vazio será desconsiderado como contável: */
+                let espaco_vazio = (nome.split(' ').length - 1)
+                
+                /* exibindo o resultado final para o usuário do sistema: */
+                mensagem.innerHTML = `O nome ${nome} possui ${(nome.length)-espaco_vazio} caracteres.`
+                
+                /* limpando o campo de nome: */
+                txt_nome.value = ``
+            }   
+        }
+    </script>
+</body>
+</html>
